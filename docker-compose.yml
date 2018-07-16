@@ -1,0 +1,6 @@
+version: "3"
+services:
+  keyboard:
+    build: .
+    volumes:
+      - .:/qmk_firmware/keyboards/ergodox_ez/keymaps/agupta/
