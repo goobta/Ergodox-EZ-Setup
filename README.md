@@ -1,5 +1,8 @@
 # Ergodox-EZ-Setup
 
+This project is designed for the Ergodox EZ which uses the [qmk](https://github.com/qmk/qmk_firmware)
+firmware. 
+
 ## Context
 My never ending quest to have the perfect keyboard layout.
 
