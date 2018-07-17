@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/agupta231/Ergodox-EZ-Setup.svg?branch=master)](https://travis-ci.com/agupta231/Ergodox-EZ-Setup)
 # Ergodox-EZ-Setup
 
 This project is designed for the Ergodox EZ which uses the [qmk](https://github.com/qmk/qmk_firmware)
