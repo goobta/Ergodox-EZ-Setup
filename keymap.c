@@ -20,74 +20,79 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+/* Keymap 0: Base
+ *
+ * ,-----------------------------------------------------.           ,-----------------------------------------------------.
+ * |           |Music |Slack |Emacs |      |      |      |           |      |Social|PWMgr |Scl2  |      |      |           |
+ * |-----------+------+------+------+------+-------------|           |------+------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |      |           |      |      |      |      |      |      |           |
+ * |-----------+------+------+------+------+------|      |           |      |------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |------|           |------|      |      |      |      |      |           |
+ * |-----------+------+------+------+------+------|      |           |      |------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |      |           |      |      |      |      |      |      |           |
+ * `-----------+------+------+------+------+-------------'           `-------------+------+------+------+------+-----------'
+ *      |      |      |      |      |      |                                       |      |      |      |      |      |
+ *      `----------------------------------'                                       `----------------------------------'
+ *                                         ,-------------.           ,-------------.
+ *                                         |      |      |           |      |      |
+ *                                  ,------|------|------|           |------+------+------.
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |------|           |------|      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  `--------------------'           `--------------------'
+ */
+
   [0] = LAYOUT_ergodox(
 			// Left Hand
-			KC_GRAVE,KC_1,KC_2,KC_3,KC_4,KC_5,RGB_VAD,
-			KC_TAB,KC_Q,KC_W,KC_E,KC_R,KC_T,
-			// Top long piece
-																								KC_MINUS,
-			GUI_T(KC_ESCAPE),KC_A,KC_S,KC_D,KC_F,KC_G,
-			KC_LSHIFT,KC_Z,KC_X,KC_C,LT(4,KC_V),KC_B,
-			// Bottom long piece
-																								ALT_T(KC_KP_ASTERISK),
-			TG(3),MO(2),MO(1),MO(5),KC_TRANSPARENT,
+			KC_GRAVE,          KC_1,   KC_2,   KC_3,   KC_4,            KC_5,   RGB_VAD,
+			KC_TAB,            KC_Q,   KC_W,   KC_E,   KC_R,            KC_T,							KC_MINUS,
+			GUI_T(KC_ESCAPE),  KC_A,   KC_S,   KC_D,   KC_F,            KC_G,
+			KC_LSHIFT,         KC_Z,   KC_X,   KC_C,   LT(4, KC_V),     KC_B,     ALT_T(KC_KP_ASTERISK),
+			TG(3),             MO(2),  MO(1),  MO(5),  KC_TRANSPARENT,
 			
-			// Left hand cluster
-			RGB_MOD,RGB_HUI,
-							RGB_HUD,
-			KC_BSPACE,KC_DELETE,
-			KC_LCTL,
+																																				// Left hand cluster
+																																				RGB_MOD,          RGB_HUI,
+																																													RGB_HUD,
+																																				KC_BSPACE,        KC_DELETE,
+																																				KC_LCTL,
 		
-			// Right hand	
-			RGB_VAI,KC_6,KC_7,KC_8,KC_9,KC_0,KC_CAPSLOCK,
-			// Top long piece
-			KC_TILD,
-							KC_Y,KC_U,KC_I,KC_O,KC_P,KC_BSLASH,
-							KC_H,KC_J,KC_K,KC_L,KC_SCOLON,RCTL_T(KC_QUOTE),
-			// Bottom long piece
-			RALT_T(KC_NO),
-							KC_N,KC_M,KC_COMMA,KC_DOT,KC_SLASH,KC_RSHIFT,
-							KC_DOWN,KC_UP,MO(2),KC_LEFT,KC_RIGHT,
+							// Right hand
+							RGB_VAI,          KC_6,   KC_7,   KC_8,      KC_9,       KC_0,              KC_CAPSLOCK,
+							KC_TILD,          KC_Y,   KC_U,   KC_I,      KC_O,       KC_P,              KC_BSLASH,
+											KC_H,     KC_J,   KC_K,   KC_L,      KC_SCOLON,  RCTL_T(KC_QUOTE),
+							RALT_T(KC_NO),    KC_N,   KC_M,   KC_COMMA,  KC_DOT,     KC_SLASH,          KC_RSHIFT,
+											KC_DOWN,  KC_UP,  MO(2),  KC_LEFT,   KC_RIGHT,
 			
-			// Right thumb cluster
-			KC_AUDIO_VOL_UP,KC_AUDIO_MUTE,
-			KC_AUDIO_VOL_DOWN,
-			KC_LGUI,KC_ENTER,KC_SPACE),
+							// Right thumb cluster
+							KC_AUDIO_VOL_UP,        KC_AUDIO_MUTE,
+							KC_AUDIO_VOL_DOWN,
+							KC_LGUI,                KC_ENTER,       KC_SPACE),
 
   [1] = LAYOUT_ergodox(
 			// Left hand
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-			 // Top long piece
-																								KC_TRANSPARENT,
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_MS_ACCEL0,KC_MS_ACCEL2,KC_MS_ACCEL1,
-			// Bottom long piece
-																								KC_TRANSPARENT,
-																									
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_MS_ACCEL0,    KC_MS_ACCEL2,    KC_MS_ACCEL1,    KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			
-			//Left thumb cluster
-			KC_TRANSPARENT,KC_TRANSPARENT,
-							KC_TRANSPARENT,
-			KC_MS_BTN2,KC_TRANSPARENT,
-			KC_TRANSPARENT,
+																																				//Left thumb cluster
+																																				KC_TRANSPARENT,          KC_TRANSPARENT,
+																																																 KC_TRANSPARENT,
+																																				KC_MS_BTN2,              KC_TRANSPARENT,
+																																				KC_TRANSPARENT,
 			
-			//Right hand
-			KC_TRANSPARENT, KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-			// Top long piece
-			KC_PGUP, 
-							KC_MS_WH_LEFT,KC_MS_WH_UP,KC_MS_WH_DOWN,KC_MS_WH_RIGHT,KC_TRANSPARENT,KC_TRANSPARENT,
-							KC_MS_LEFT,KC_MS_DOWN,KC_MS_UP,KC_MS_RIGHT,KC_TRANSPARENT,KC_TRANSPARENT,
-			// Bottom long piece
-			KC_PGDOWN,
-							KC_LEFT,KC_DOWN,KC_UP,KC_RIGHT,KC_TRANSPARENT,KC_TRANSPARENT,
-							KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
+							//Right hand
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_PGUP,                 KC_MS_WH_LEFT,   KC_MS_WH_UP,     KC_MS_WH_DOWN,   KC_MS_WH_RIGHT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+											KC_MS_LEFT,      KC_MS_DOWN,      KC_MS_UP,        KC_MS_RIGHT,     KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_PGDOWN,               KC_LEFT,         KC_DOWN,         KC_UP,           KC_RIGHT,        KC_TRANSPARENT,  KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 		
-			// Right thumb cluster
-			KC_TRANSPARENT,KC_TRANSPARENT,
-			KC_TRANSPARENT,
-			KC_TRANSPARENT,KC_TRANSPARENT,KC_MS_BTN1),
+							// Right thumb cluster
+							KC_TRANSPARENT,         KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,         KC_TRANSPARENT,  KC_MS_BTN1),
 
 
   [2] = LAYOUT_ergodox(
