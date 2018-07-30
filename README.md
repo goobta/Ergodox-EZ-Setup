@@ -7,6 +7,11 @@ firmware.
 ## Context
 My never ending quest to have the perfect keyboard layout.
 
+## Definitions
+In this repository, the every release is a **keymap** location change. Major releases indicate that
+there is an intrusive change that will require a workflow shift. Minor changes indicate a key moved
+here or there, and doesn't really warrant for a full fledged release.
+
 ## How to compile
 ### Manually (Not Recommended)
 1. Clone the [qmk_firmware](https://github.com/qmk/qmk_firmware) repo.
