@@ -8,14 +8,21 @@
 
 #include "keymap_nordic.h"
 
-
+// Layers
+enum layers {
+	BASE = 0,
+	NAV,
+	SYMB,
+	MATH,
+	VIM,
+	MAC,
+};
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
   VRSN,
   RGB_SLD,
-  
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -42,13 +49,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                  `--------------------'           `--------------------'
  */
 
-  [0] = LAYOUT_ergodox(
+  [BASE] = LAYOUT_ergodox(
 			// Left Hand
 			KC_GRAVE,          KC_1,   KC_2,   KC_3,   KC_4,            KC_5,   RGB_VAD,
 			KC_TAB,            KC_Q,   KC_W,   KC_E,   KC_R,            KC_T,							KC_MINUS,
 			GUI_T(KC_ESCAPE),  KC_A,   KC_S,   KC_D,   KC_F,            KC_G,
-			KC_LSHIFT,         KC_Z,   KC_X,   KC_C,   LT(4, KC_V),     KC_B,     ALT_T(KC_KP_ASTERISK),
-			TG(3),             MO(2),  MO(1),  MO(5),  KC_TRANSPARENT,
+			KC_LSHIFT,         KC_Z,   KC_X,   KC_C,   LT(VIM, KC_V),     KC_B,     ALT_T(KC_KP_ASTERISK),
+			TG(MATH),          MO(SYMB),  MO(NAV),  MO(MAC),  KC_TRANSPARENT,
 			
 																																				// Left hand cluster
 																																				RGB_MOD,          RGB_HUI,
@@ -61,14 +68,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TILD,          KC_Y,   KC_U,   KC_I,      KC_O,       KC_P,              KC_BSLASH,
 											KC_H,     KC_J,   KC_K,   KC_L,      KC_SCOLON,  RCTL_T(KC_QUOTE),
 							RALT_T(KC_GRAVE),    KC_N,   KC_M,   KC_COMMA,  KC_DOT,     KC_SLASH,          KC_RSHIFT,
-											KC_DOWN,  KC_UP,  MO(2),  KC_LEFT,   KC_RIGHT,
+											KC_DOWN,  KC_UP,  MO(SYMB),  KC_LEFT,   KC_RIGHT,
 			
 							// Right thumb cluster
 							KC_AUDIO_VOL_UP,        KC_AUDIO_MUTE,
 							KC_AUDIO_VOL_DOWN,
 							KC_LGUI,                KC_ENTER,       KC_SPACE),
 
-  [1] = LAYOUT_ergodox(
+// Keymap 1: Navigation
+  [NAV] = LAYOUT_ergodox(
 			// Left hand
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -95,7 +103,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,         KC_TRANSPARENT,  KC_MS_BTN1),
 
 
-  [2] = LAYOUT_ergodox(
+// Keymap 2: Symbols
+  [SYMB] = LAYOUT_ergodox(
 			//Left hand
 			KC_TRANSPARENT,  KC_F16,          KC_F15,          KC_F14,          KC_F13,          KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_F12,          KC_F11,          KC_F10,          KC_F9,           KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -121,7 +130,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,
 							KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT),
 
-  [3] = LAYOUT_ergodox(
+// Keymamp 3: Math
+  [MATH] = LAYOUT_ergodox(
 			//Left hand
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_KP_MINUS,     KC_LPRN,         KC_RPRN,         KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -147,7 +157,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,
 							KC_TRANSPARENT,  KC_KP_ENTER,     KC_TAB),
 
-  [4] = LAYOUT_ergodox(
+// Keymap 4: VIM
+  [VIM] = LAYOUT_ergodox(
 			//Left hand
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -173,7 +184,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,
 							KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT),
 
-  [5] = LAYOUT_ergodox(
+// Keymap 5: MacOS + Magnet App integration
+  [MAC] = LAYOUT_ergodox(
 			//Left hand
 			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
 			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
