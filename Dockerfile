@@ -25,4 +25,6 @@ RUN cd / && \
     mkdir -p qmk_firmware/keyboards/ergodox_ez/keymaps/agupta
 
 WORKDIR /qmk_firmware
-CMD make ergodox_ez:agupta && cp ergodox_ez_agupta.hex keyboards/ergodox_ez/keymaps/agupta
+CMD make git-submodule && \
+	  make ergodox_ez:agupta && \
+    cp ergodox_ez_agupta.hex keyboards/ergodox_ez/keymaps/agupta
