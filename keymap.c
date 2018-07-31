@@ -26,6 +26,37 @@ enum custom_keycodes {
   RGB_SLD,
 };
 
+/**
+ * ******************** LEGEND *******************
+ *
+ * There will be a lot of non standard abbrevaiations in this program. For anybody new, (or me,
+ * after like, 2 days) these abbrebivations will make 0 sense. Over here, you can find out what
+ * everything means. 
+ *
+ * If something still doesn't make sense, please open up an issue on my github. If you figure out
+ * what the cyptic abbreviation means, by all means, open up a PR editing this legend.
+ *
+ *
+ *
+ * ************ Note about key layouts *********** 
+ * All the keys are their standard keys, and work as if they are on a normal keyboard (shift works).
+ * If something is different, it will be explicitly stated.
+ *
+ *
+ *
+ * ************ Legend ***************************
+ * BUP = LED brightness up
+ * BDOWN = LED brightness down
+ * HOLD(<key>) = Outputs <key> if held, otherwise, outputs the other key
+ * TG = Toggle Layer
+ * MO = Only toggle selected layer when this key is held down
+ * ANIME = I swear this isn't what you think it is! Animates the LEDs on the keyboard.
+ * H UP = Raise the hue of the LEDS
+ * H DOWN = Lower the hue of the LEDS
+ * V UP = Volume up
+ * V DOWN = Volume down
+ */
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Keymap 0: Base
