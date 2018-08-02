@@ -44,9 +44,8 @@ live repository, and it is easier to do a `docker-compose build`, which will run
 because of how docker caches, than it is to publish a new image for every release of `qmk`.
 
 ## Current Layout
-Please refer to my [keymap](https://github.com/agupta231/Ergodox-EZ-Setup/blob/master/keymap.pdf) to
-see what the current layout of the keyboard is. To see the different revisions of the layout, please
-see the releases section.
+Please checkout the comments in `keymap.c` to see what the current layout of the keyboard is. To 
+see the different revisions of the layout, please see the releases section.
 
 ## Keystroke Heatmap
 TODO
