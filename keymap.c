@@ -112,8 +112,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |           |      |      |      | HOLD |      |       |           |       |      |      |      |      |      |           |
  * |           |      |      |      |(VIM) |      |       |           |       |      |      |      |      |      |           |
  * `-----------+------+------+------+------+--------------'           ` -------------+------+------+------+------+-----------'
- *      | MATH | NAV  | SYMB |  MAC |      |                                       | DOWN |  UP  | SYMB | <-   |  ->  |
- *      |  TG  |  MO  |  MO  |  MO  |      |                                       | ARROW| ARROW| MO   |      |      |
+ *      | MATH | SYMB | NAV  |  MAC |      |                                       | DOWN |  UP  | SYMB | <-   |  ->  |
+ *      |  TG  |  MO  |  TT  |  MO  |      |                                       | ARROW| ARROW| MO   |      |      |
  *      `----------------------------------'                                       `----------------------------------'
  *                                         ,-------------.           ,-------------.
  *                                         |ANIME | H UP |           | V UP | MUTE |
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TAB,            KC_Q,   KC_W,   KC_E,   KC_R,            KC_T,							KC_MINUS,
 			GUI_T(KC_ESCAPE),  KC_A,   KC_S,   KC_D,   KC_F,            KC_G,
 			KC_LSHIFT,         KC_Z,   KC_X,   KC_C,   LT(VIM, KC_V),     KC_B,     ALT_T(KC_KP_ASTERISK),
-			TG(MATH),          MO(SYMB),  MO(NAV),  MO(MAC),  KC_TRANSPARENT,
+			TG(MATH),          MO(SYMB),  TT(NAV),  MO(MAC),  KC_TRANSPARENT,
 			
 																																				// Left hand cluster
 																																				RGB_MOD,          RGB_HUI,
