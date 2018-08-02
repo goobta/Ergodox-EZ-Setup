@@ -50,6 +50,7 @@ enum custom_keycodes {
  * HOLD(<key>) = Outputs <key> if held, otherwise, outputs the other key
  * TG = Toggle Layer
  * MO = Only toggle selected layer when this key is held down
+ * TT = Act as MO. If the key is just tapped, than toggle layer
  * ANIME = I swear this isn't what you think it is! Animates the LEDs on the keyboard.
  * H UP = Raise the hue of the LEDS
  * H DOWN = Lower the hue of the LEDS
