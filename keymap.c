@@ -22,6 +22,10 @@ enum custom_keycodes {
   EPRM,
   VRSN,
   RGB_SLD,
+	VIM_MOVE_LEFT,
+	VIM_MOVE_RIGHT,
+	VIM_MOVE_UP,
+	VIM_MOVE_DOWN,
 };
 
 /**
@@ -394,10 +398,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 							// Right hand
 							KC_TRANSPARENT,   KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,   KC_TRANSPARENT,
-							KC_TRANSPARENT,   LCTL(LSFT(KC_H)),   LCTL(LSFT(KC_J)),   LCTL(LSFT(KC_K)),   LCTL(LSFT(KC_L)),   KC_TRANSPARENT,   KC_TRANSPARENT,
-							LCTL(KC_H),       LCTL(KC_J),         LCTL(KC_K),         LCTL(KC_L),         KC_TRANSPARENT,     KC_TRANSPARENT,
+							KC_TRANSPARENT,   VIM_MOVE_LEFT,      VIM_MOVE_DOWN,       VIM_MOVE_UP,        VIM_MOVE_RIGHT,     KC_TRANSPARENT,   KC_TRANSPARENT,
+																LCTL(KC_H),         LCTL(KC_J),         LCTL(KC_K),         LCTL(KC_L),         KC_TRANSPARENT,     KC_TRANSPARENT,
 							KC_TRANSPARENT,   KC_F9,              KC_F8,              KC_F7,              KC_F10,             KC_TRANSPARENT,   KC_TRANSPARENT,
-							KC_TRANSPARENT,   KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,
+																KC_TRANSPARENT,   KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,
 											
 							// Right thumb cluster
 							KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -512,12 +516,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    
+		case VIM_MOVE_LEFT:
+			SEND_STRING(SS_LCTRL("W")"H");
+			break;
+		case VIM_MOVE_RIGHT:
+			SEND_STRING(SS_LCTRL("W")"L");
+			break;
+		case VIM_MOVE_UP:
+			SEND_STRING(SS_LCTRL("W")"K");
+			break;
+		case VIM_MOVE_DOWN:
+			SEND_STRING(SS_LCTRL("W")"J");
+			break;
   }
   return true;
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
+
 
     uint8_t layer = biton32(state);
 
