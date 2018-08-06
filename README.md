@@ -5,7 +5,9 @@ This project is designed for the Ergodox EZ which uses the [qmk](https://github.
 firmware. 
 
 ## Context
-My never ending quest to have the perfect keyboard layout.
+My never ending quest to have the perfect keyboard layout. This project is *very* closely related
+with my [dotfiles](https://github.com/agupta231/dotfiles) repo. In fact, I would go as far as to say
+that if you don't have the background of the dotfiles, many of the macros will seem very random.
 
 ## Definitions
 In this repository, the every release is a **keymap** location change. Major releases indicate that
