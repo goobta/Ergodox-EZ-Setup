@@ -26,6 +26,20 @@ enum custom_keycodes {
 	VIM_MOVE_RIGHT,
 	VIM_MOVE_UP,
 	VIM_MOVE_DOWN,
+	TMUX_SELECT_PANE_LEFT,
+	TMUX_SELECT_PANE_RIGHT,
+	TMUX_SELECT_PANE_UP,
+	TMUX_SELECT_PANE_DOWN,
+	TMUX_MOVE_PANE_LEFT,
+	TMUX_MOVE_PANE_RIGHT,
+	TMUX_MOVE_PANE_UP,
+	TMUX_MOVE_PANE_DOWN,
+	TMUX_EXPAND_PANE_LEFT,
+	TMUX_EXPAND_PANE_RIGHT,
+	TMUX_EXPAND_PANE_UP,
+	TMUX_EXPAND_PANE_DOWN,
+	TMUX_SPLIT_HORIZONTAL,
+	TMUX_SPLIT_VERTICAL,
 };
 
 /**
@@ -510,17 +524,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
  * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
  * |-----------+------+------+------+------+--------------|           |-------+------+------+------+------+------+-----------|
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |MOVE  |MOVE  |MOVE  |MOVE  |      |           |
+ * |           |      |      |      |      |      |       |           | SPLIT |PANE  |PANE  |PANE  |PANE  |      |           |
+ * |           |      |      |      |      |      |       |           | VERT  |LEFT  |DOWN  |UP    |RIGHT |      |           |
  * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |-------|           |-------|      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |SELECT|SELECT|SELECT|SELECT|      | SPLIT     |
+ * |           |      |      |      |      |      |-------|           |-------|PANE  | PANE | PANE | PANE |      | HORIZONTAL|
+ * |           |      |      |      |      |      |       |           |       |LEFT  | DOWN |  UP  | RIGHT|      |           |
  * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |EXPAND|EXPAND|EXPAND|EXPAND|      |           |
+ * |           |      |      |      |      |      |       |           |       |PANE  | PANE | PANE | PANE |      |           |
+ * |           |      |      |      |      |      |       |           |       |LEFT  | DOWN |  UP  | RIGHT|      |           |
  * `-----------+------+------+------+------+--------------'           ` -------------+------+------+------+------+-----------'
  *      |      |      |      |      |      |                                         |      |      |      |      |      |
  *      |      |      |      |      |      |                                         |      |      |      |      |      |
@@ -557,9 +571,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			
 							//Right hand
 							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
-							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
-																			 KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
-							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							TMUX_SPLIT_VERTICAL,     TMUX_MOVE_PANE_LEFT,  TMUX_MOVE_PANE_DOWN,  TMUX_MOVE_PANE_UP,  TMUX_MOVE_PANE_RIGHT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+																			 TMUX_SELECT_PANE_LEFT,  TMUX_SELECT_PANE_DOWN,  TMUX_SELECT_PANE_UP,  TMUX_SELECT_PANE_RIGHT,  KC_TRANSPARENT,  TMUX_SPLIT_HORIZONTAL,
+							KC_TRANSPARENT,          TMUX_EXPAND_PANE_LEFT,  TMUX_EXPAND_PANE_DOWN,  TMUX_EXPAND_PANE_UP,  TMUX_EXPAND_PANE_RIGHT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 											KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 		
 							// Right thumb cluster
@@ -613,16 +627,112 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
 		case VIM_MOVE_LEFT:
-			SEND_STRING(SS_LCTRL("W")"H");
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("W")"H");
+			}
+			return false;
 			break;
 		case VIM_MOVE_RIGHT:
-			SEND_STRING(SS_LCTRL("W")"L");
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("W")"L");
+			}
+			return false;
 			break;
 		case VIM_MOVE_UP:
-			SEND_STRING(SS_LCTRL("W")"K");
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("W")"K");
+			}
+			return false;
 			break;
 		case VIM_MOVE_DOWN:
-			SEND_STRING(SS_LCTRL("W")"J");
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("W")"J");
+			}
+			return false;
+			break;
+		case TMUX_SELECT_PANE_LEFT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_LEFT));
+			}
+			return false;
+			break;
+		case TMUX_SELECT_PANE_RIGHT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_RIGHT));
+			}
+			return false;
+			break;
+		case TMUX_SELECT_PANE_UP:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_UP));
+			}
+			return false;
+			break;
+		case TMUX_SELECT_PANE_DOWN:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_DOWN));
+			}
+			return false;
+			break;
+		case TMUX_MOVE_PANE_LEFT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"H");
+			}
+			return false;
+			break;
+		case TMUX_MOVE_PANE_RIGHT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"L");
+			}
+			return false;
+			break;
+		case TMUX_MOVE_PANE_UP:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"K");
+			}
+			return false;
+			break;
+		case TMUX_MOVE_PANE_DOWN:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"J");
+			}
+			return false;
+			break;
+		case TMUX_EXPAND_PANE_LEFT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_F9));
+			}
+			return false;
+			break;
+		case TMUX_EXPAND_PANE_RIGHT:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_F10));
+			}
+			return false;
+			break;
+		case TMUX_EXPAND_PANE_UP:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_F7));
+			}
+			return false;
+			break;
+		case TMUX_EXPAND_PANE_DOWN:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")SS_TAP(X_F8));
+			}
+			return false;
+			break;
+		case TMUX_SPLIT_HORIZONTAL:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"-");
+			}
+			return false;
+			break;
+		case TMUX_SPLIT_VERTICAL:
+      if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b")"|");
+			}
+			return false;
 			break;
   }
   return true;
