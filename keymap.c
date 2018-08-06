@@ -26,6 +26,8 @@ enum custom_keycodes {
 	VIM_MOVE_RIGHT,
 	VIM_MOVE_UP,
 	VIM_MOVE_DOWN,
+	VIM_COPY,
+	VIM_PASTE,
 	TMUX_SELECT_PANE_LEFT,
 	TMUX_SELECT_PANE_RIGHT,
 	TMUX_SELECT_PANE_UP,
@@ -398,17 +400,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
  * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
  * |-----------+------+------+------+------+--------------|           |-------+------+------+------+------+------+-----------|
- * |           |      |      |      |      |      |       |           |       |MOVE  |MOVE  |MOVE  |MOVE  |      |           |
- * |           |      |      |      |      |      |       |           |       |PANE  |PANE  |PANE  |PANE  |      |           |
- * |           |      |      |      |      |      |       |           |       |LEFT  |DOWN  |UP    |RIGHT |      |           |
+ * |           |      |      |      |      |      |       |           |       |MOVE  |MOVE  |MOVE  |MOVE  |PASTE |           |
+ * |           |      |      |      |      |      |       |           |       |PANE  |PANE  |PANE  |PANE  | FROM |           |
+ * |           |      |      |      |      |      |       |           |       |LEFT  |DOWN  |UP    |RIGHT |CLIPBD|           |
  * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
  * |           |      |      |      |      |      |       |           |       | CNTl | CNTl | CNTl | CNTl |      |           |
  * |           |      |      |      |      |      |-------|           |-------|      |      |      |      |      |           |
  * |           |      |      |      |      |      |       |           |       |  h   |  j   |  k   |  l   |      |           |
  * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
- * |           |      |      |      |      |      |       |           |       |  f9  |  f8  |  f7  |  f10 |      |           |
- * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |COPY  |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      | TO   |      |      |       |           |       |  f9  |  f8  |  f7  |  f10 |      |           |
+ * |           |      |      |CLIPBD|      |      |       |           |       |      |      |      |      |      |           |
  * `-----------+------+------+------+------+--------------'           ` -------------+------+------+------+------+-----------'
  *      |      |      |      |      |      |                                         |      |      |      |      |      |
  *      |      |      |      |      |      |                                         |      |      |      |      |      |
@@ -433,7 +435,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  VIM_COPY,        KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
 			
 																																				// Left thumb cluster
@@ -444,7 +446,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 							// Right hand
 							KC_TRANSPARENT,   KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,   KC_TRANSPARENT,
-							KC_TRANSPARENT,   VIM_MOVE_LEFT,      VIM_MOVE_DOWN,       VIM_MOVE_UP,        VIM_MOVE_RIGHT,     KC_TRANSPARENT,   KC_TRANSPARENT,
+							KC_TRANSPARENT,   VIM_MOVE_LEFT,      VIM_MOVE_DOWN,       VIM_MOVE_UP,        VIM_MOVE_RIGHT,    VIM_PASTE,   KC_TRANSPARENT,
 																LCTL(KC_H),         LCTL(KC_J),         LCTL(KC_K),         LCTL(KC_L),         KC_TRANSPARENT,     KC_TRANSPARENT,
 							KC_TRANSPARENT,   KC_F9,              KC_F8,              KC_F7,              KC_F10,             KC_TRANSPARENT,   KC_TRANSPARENT,
 																KC_TRANSPARENT,   KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,     KC_TRANSPARENT,
@@ -647,6 +649,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case VIM_MOVE_DOWN:
       if (record->event.pressed) {
 				SEND_STRING(SS_LCTRL("W")"J");
+			}
+			return false;
+			break;
+		case VIM_COPY:
+			if (record->event.pressed) {
+				SEND_STRING("\"+y");
+			}
+			return false;
+			break;
+		case VIM_PASTE:
+			if (record->event.pressed) {
+				SEND_STRING("\"+p");
 			}
 			return false;
 			break;
