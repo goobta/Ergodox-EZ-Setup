@@ -99,6 +99,36 @@ enum custom_keycodes {
  *                                  `--------------------'           `--------------------'
  */
 
+/* Keymap Blank Template
+ 
+  [TMUX] = LAYOUT_ergodox(
+			// Left hand
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			
+																																				//Left thumb cluster
+																																				KC_TRANSPARENT,          KC_TRANSPARENT,
+																																																 KC_TRANSPARENT,
+																																				KC_TRANSPARENT,          KC_TRANSPARENT,
+																																				KC_TRANSPARENT,
+			
+							//Right hand
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+																			 KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+		
+							// Right thumb cluster
+							KC_TRANSPARENT,         KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,         KC_TRANSPARENT,  KC_TRANSPARENT),
+
+*/
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Keymap 0: Base
@@ -107,6 +137,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |     `     |  1   |  2   |  3   |   4  |  5   |  BUP  |           | BDOWN |   6  | 7    |  8   |  9   |  0   | CAPS LCK  |
  * |-----------+------+------+------+------+--------------|           |-------+------+------+------+------+------+-----------|
  * |    TAB    |  Q   |  W   |  E   |  R   |  T   |   -   |           |   ~   |  Y   |  U   |  I   |  O   |  P   |    \      |
+ * |           |      |      |      |      | HOLD |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      | TMUX |       |           |       |      |      |      |      |      |           |
  * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
  * |    ESC    |  A   |  S   |  D   |  F   |  G   |-------|           |-------|  H   |  J   |  K   |  L   |  ;   |    '      |
  * | HOLD(CMD) |      |      |      |      |      |   *   |           |   `   |      |      |      |      |      |           |
@@ -130,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox(
 			// Left Hand
 			KC_GRAVE,          KC_1,   KC_2,   KC_3,   KC_4,            KC_5,   RGB_VAD,
-			KC_TAB,            KC_Q,   KC_W,   KC_E,   KC_R,            KC_T,							KC_MINUS,
+			KC_TAB,            KC_Q,   KC_W,   KC_E,   KC_R,            LT(TMUX, KC_T),							KC_MINUS,
 			GUI_T(KC_ESCAPE),  KC_A,   KC_S,   KC_D,   KC_F,            KC_G,
 			KC_LSHIFT,         KC_Z,   KC_X,   KC_C,   LT(VIM, KC_V),     KC_B,     ALT_T(KC_KP_ASTERISK),
 			TG(MATH),          MO(SYMB),  TT(NAV),  MO(MAC),  KC_TRANSPARENT,
@@ -470,6 +502,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TRANSPARENT,KC_TRANSPARENT,
 			KC_TRANSPARENT,
 			KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT),
+
+/* Keymap 6: TMUX
+ * 
+ * ,------------------------------------------------------.           ,------------------------------------------------------.
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |-----------+------+------+------+------+--------------|           |-------+------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |-------|           |-------|      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |-----------+------+------+------+------+------|       |           |       |------+------+------+------+------+-----------|
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * |           |      |      |      |      |      |       |           |       |      |      |      |      |      |           |
+ * `-----------+------+------+------+------+--------------'           ` -------------+------+------+------+------+-----------'
+ *      |      |      |      |      |      |                                         |      |      |      |      |      |
+ *      |      |      |      |      |      |                                         |      |      |      |      |      |
+ *      |      |      |      |      |      |                                         |      |      |      |      |      |
+ *      `----------------------------------'                                         `----------------------------------'
+ *                                         ,-------------.           ,-------------.
+ *                                         |      |      |           |      |      |
+ *                                         |      |      |           |      |      |
+ *                                         |      |      |           |      |      |
+ *                                  ,------|------|------|           |------+------+------.
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |------|           |------|      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  |      |      |      |           |      |      |      |
+ *                                  `--------------------'           `--------------------'
+ */
+
+  [TMUX] = LAYOUT_ergodox(
+			// Left hand
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+			
+																																				//Left thumb cluster
+																																				KC_TRANSPARENT,          KC_TRANSPARENT,
+																																																 KC_TRANSPARENT,
+																																				KC_TRANSPARENT,          KC_TRANSPARENT,
+																																				KC_TRANSPARENT,
+			
+							//Right hand
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+																			 KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+							KC_TRANSPARENT,          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
+		
+							// Right thumb cluster
+							KC_TRANSPARENT,         KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,         KC_TRANSPARENT,  KC_TRANSPARENT),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
