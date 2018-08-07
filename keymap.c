@@ -215,9 +215,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 |			|			 |			|				|						|page		|wheel |wheel |wheel |wheel |			 |					 |
  * |					 |			|			 |			|			 |			|				|						|up			|left  |up		|down  |right |			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
- * |					 |			|			 |			|			 |			|				|						|				|mouse |mouse |mouse |mouse |			 |					 |
- * |					 |			|			 |			|			 |			|-------|						|-------|left  | down |up		 |right |			 |					 |
- * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |PAUSE |PREV  |NEXT  |				|						|				|mouse |mouse |mouse |mouse |			 |					 |
+ * |					 |			|			 |MUSIC |TRACK |TRACK |-------|						|-------|left  | down |up		 |right |			 |					 |
+ * |					 |			|			 |      |			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|page		|------+------+------+------+------+-----------|
  * |					 |			|			 |Accel |Accel |Accel |				|						|down		|			 |down	|  ^	 |			|			 |					 |
  * |					 |			|			 | 0		| 2		 | 1		|				|						|				| <-	 |arrow |  |	 | ->		|			 |					 |
@@ -245,7 +245,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			// Left hand
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_MEDIA_PLAY_PAUSE,	KC_MEDIA_REWIND, KC_MEDIA_FAST_FORWARD,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_MS_ACCEL0,		KC_MS_ACCEL2,		 KC_MS_ACCEL1,		KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			
