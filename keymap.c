@@ -15,6 +15,7 @@ enum layers {
 	VIM,
 	MAC,
 	TMUX,
+	GAME
 };
 
 enum custom_keycodes {
@@ -166,8 +167,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 |			| HOLD |			|				|						|				|			 |			|			 |			|			 |					 |
  * |					 |			|			 |			|(VIM) |			|				|						|				|			 |			|			 |			|			 |					 |
  * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
- *			| MATH | SYMB | NAV  |	MAC |			 |																			 | DOWN |  UP  | SYMB | <-	 |	->	|
- *			|  TG  |	MO	|  TT  |	MO	|			 |																			 | ARROW| ARROW| MO		|			 |			|
+ *			| MATH | SYMB | NAV  |	MAC | GAME |																	     | DOWN |  UP  | SYMB | <-	 |	->	|
+ *			|  TG  |	MO	|  TT  |	MO	|	 T0	 |																			 | ARROW| ARROW| MO		|			 |			|
  *			`----------------------------------'																			 `----------------------------------'
  *																				 ,-------------.					 ,-------------.
  *																				 |ANIME | H UP |					 | V UP | MUTE |
@@ -184,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TAB,						 KC_Q,	 KC_W,	 KC_E,	 KC_R,						LT(TMUX, KC_T),							KC_MINUS,
 			GUI_T(KC_ESCAPE),  KC_A,	 KC_S,	 KC_D,	 KC_F,						KC_G,
 			KC_LSHIFT,				 KC_Z,	 KC_X,	 KC_C,	 LT(VIM, KC_V),			KC_B,			ALT_T(KC_KP_ASTERISK),
-			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	KC_TRANSPARENT,
+			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	TO(GAME),
 			
 																																				// Left hand cluster
 																																				RGB_MOD,					RGB_HUI,
@@ -579,6 +580,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							TMUX_SPLIT_VERTICAL,		 TMUX_MOVE_PANE_LEFT,  TMUX_MOVE_PANE_DOWN,  TMUX_MOVE_PANE_UP,  TMUX_MOVE_PANE_RIGHT,	TMUX_PAUSE_TERM_OUTPUT,  KC_TRANSPARENT,
 																			 TMUX_SELECT_PANE_LEFT,  TMUX_SELECT_PANE_DOWN,  TMUX_SELECT_PANE_UP,  TMUX_SELECT_PANE_RIGHT,	KC_TRANSPARENT,  TMUX_SPLIT_HORIZONTAL,
 							TMUX_FOCUS_PANE,				 TMUX_EXPAND_PANE_LEFT,  TMUX_EXPAND_PANE_DOWN,  TMUX_EXPAND_PANE_UP,  TMUX_EXPAND_PANE_RIGHT,	KC_TRANSPARENT,  KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+		
+							// Right thumb cluster
+							KC_TRANSPARENT,					KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
+
+
+/* Keymap 7: GAME
+ * 
+ * ,------------------------------------------------------.						,------------------------------------------------------.
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |  1		|	 2	 |	3 	|	 4	 |	5 	|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * | TAB  		 |  Q		|	 W	 |	E 	|	 R   |	T 	|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * | L ALT		 |  A		|	 S	 |	D 	|	 F	 |	G 	|-------|						|-------|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * | L SHIFT	 |	Z 	|	 X	 |	C 	|	 V	 |	B 	|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
+ *			| BASE |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|	T0	 | F1		|	 F2	 |	F3	|	 F4	 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			`----------------------------------'																				 `----------------------------------'
+ *																				 ,-------------.					 ,-------------.
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																	,------|------|------|					 |------+------+------.
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|	 S	 |			|			 |					 |			|			 |			|
+ *																	|	 P	 |  C		|			 |					 |			|			 |			|
+ *																	|	 A	 |  N		|------|					 |------|			 |			|
+ *																	|	 C	 |  T		|			 |					 |			|			 |			|
+ *																	|	 E	 |  L		|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	`--------------------'					 `--------------------'
+ */
+
+	[GAME] = LAYOUT_ergodox(
+			// Left Hand
+			KC_TRANSPARENT,		 KC_1,	 KC_2,	 KC_3,	 KC_4,						KC_5,		KC_TRANSPARENT,
+			KC_TAB,						 KC_Q,	 KC_W,	 KC_E,	 KC_R,						KC_T,		KC_TRANSPARENT,
+			KC_ESCAPE,         KC_A,	 KC_S,	 KC_D,	 KC_F,						KC_G,
+			KC_LSHIFT,				 KC_Z,	 KC_X,	 KC_C,	 KC_V,			      KC_B,		KC_TRANSPARENT,	
+			TO(BASE),					 KC_F1,	 KC_F2,	 KC_F3,	 KC_F4,
+			
+																																				// Left hand cluster
+																																				KC_TRANSPARENT,	  KC_TRANSPARENT,
+																																													KC_TRANSPARENT,
+																																				KC_SPACE,				  KC_LCTRL,
+																																				KC_TRANSPARENT,
+							//Right hand
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+																			 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 		
 							// Right thumb cluster
