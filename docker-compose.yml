@@ -3,4 +3,4 @@ services:
   keyboard:
     build: .
     volumes:
-      - .:/qmk_firmware/keyboards/ergodox_ez/keymaps/agupta/
+      - .:/qmk_firmware/keyboards/ergodox_ez/keymaps/agupta/:Z

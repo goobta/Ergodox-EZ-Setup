@@ -28,4 +28,4 @@ RUN cd / && \
 
 WORKDIR /qmk_firmware
 CMD make ergodox_ez:agupta && \
-    cp ergodox_ez_agupta.hex keyboards/ergodox_ez/keymaps/agupta
+		cp ergodox_ez_agupta.hex keyboards/ergodox_ez/keymaps/agupta
