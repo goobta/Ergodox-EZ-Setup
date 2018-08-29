@@ -278,15 +278,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 | f12	| f11  | f10	| f9	 |			|				|						|				|  #	 |	[		|  ]	 |	&		|  |	 |					 |
+ * |					 | f12	| f11  | f10	| f9	 |			|				|						|				|  #	 |	[		|  ]	 |	&		|  |	 |	  ^			 |
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 | f8		| f7	 | f6		| f5	 |			|-------|						|-------|  @	 |	(		|  )	 |	!		|  =	 |					 |
+ * |					 | f8		| f7	 | f6		| f5	 |			|-------|						|-------|  @	 |	(		|  )	 |	!		|  =	 |	  %			 |
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 | f4		| f3	 | f2		| f1	 |			|				|						|				|  $	 |	{		|  }	 |	+		|  -	 |					 |
+ * |					 | f4		| f3	 | f2		| f1	 |			|				|						|				|  $	 |	{		|  }	 |	+		|  -	 |	    		 |
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
  *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
@@ -324,8 +324,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 							// Right hand
 							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-							KC_TRANSPARENT,					 KC_HASH,					KC_LBRACKET,		 KC_RBRACKET,			KC_AMPR,				 KC_PIPE,					KC_TRANSPARENT,
-											KC_AT,					 KC_LPRN,					KC_RPRN,				 KC_EXLM,					KC_EQUAL,				 KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_HASH,					KC_LBRACKET,		 KC_RBRACKET,			KC_AMPR,				 KC_PIPE,					KC_CIRCUMFLEX,
+											KC_AT,					 KC_LPRN,					KC_RPRN,				 KC_EXLM,					KC_EQUAL,				 KC_PERCENT,
 							KC_TRANSPARENT,					 KC_DLR,					KC_LCBR,				 KC_RCBR,					KC_PLUS,				 KC_MINUS,				KC_TRANSPARENT,
 											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			
