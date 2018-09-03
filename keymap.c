@@ -29,6 +29,7 @@ enum custom_keycodes {
 	VIM_MOVE_DOWN,
 	VIM_COPY,
 	VIM_PASTE,
+	VIM_SPELL,
 	TMUX_SELECT_PANE_LEFT,
 	TMUX_SELECT_PANE_RIGHT,
 	TMUX_SELECT_PANE_UP,
@@ -408,9 +409,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 |			|			 |			|				|						|				|PANE  |PANE	|PANE  |PANE	| FROM |					 |
  * |					 |			|			 |			|			 |			|				|						|				|LEFT  |DOWN	|UP		 |RIGHT |CLIPBD|					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
- * |					 |			|			 |			|			 |			|				|						|				| CNTl | CNTl | CNTl | CNTl |			 |					 |
- * |					 |			|			 |			|			 |			|-------|						|-------|			 |			|			 |			|			 |					 |
- * |					 |			|			 |			|			 |			|				|						|				|  h	 |	j		|  k	 |	l		|			 |					 |
+ * |					 |			|SPELL |			|			 |			|				|						|				| CNTl | CNTl | CNTl | CNTl |			 |					 |
+ * |					 |			|CHECK |			|			 |			|-------|						|-------|			 |			|			 |			|			 |					 |
+ * |					 |			|WORD  |			|			 |			|				|						|				|  h	 |	j		|  k	 |	l		|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |					 |			|			 |COPY	|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |					 |			|			 | TO		|			 |			|				|						|				|  f9  |	f8	|  f7  |	f10 |			 |					 |
@@ -438,7 +439,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			//Left hand
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	VIM_SPELL,       KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  VIM_COPY,				KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			
@@ -729,6 +730,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case VIM_PASTE:
 			if (record->event.pressed) {
 				SEND_STRING("\"+p");
+			}
+			return false;
+			break;
+		case VIM_SPELL:
+			if (record->event.pressed) {
+				SEND_STRING("z=");
 			}
 			return false;
 			break;
