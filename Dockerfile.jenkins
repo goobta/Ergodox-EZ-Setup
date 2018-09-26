@@ -1,6 +1,8 @@
 FROM debian:buster-slim
 MAINTAINER Ankur Gupta <github.com/agupta231>
 
+USER root
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates \
                                                gcc \
