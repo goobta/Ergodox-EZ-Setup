@@ -31,5 +31,4 @@ RUN cd / && \
 COPY . /qmk_firmware/keyboards/ergodox_ez/keymaps/agupta/
 
 WORKDIR /qmk_firmware
-CMD make ergodox_ez:agupta && \
-		cp ergodox_ez_agupta.hex keyboards/ergodox_ez/keymaps/agupta
+CMD make ergodox_ez:agupta
