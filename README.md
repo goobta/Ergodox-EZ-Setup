@@ -35,6 +35,10 @@ If there are any new updates to the	`qmk_firmware` repo, just run a `docker-comp
 Only if you edit the Dockerfile, then you need to run a `docker-compose build`... but if you're
 editing the Dockerfile, then you already know that.
 
+*Note*: If you are on Linux, you can also run `./run.sh` which will do all of
+the above steps for you. Disregard all of the Jenkins stuff... that's just for
+CI
+
 #### Docker FAQ
 ##### Why does it take so long to run?
 If it is your first time running it, Docker will be creating the environment in order to compile the
