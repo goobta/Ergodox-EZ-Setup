@@ -925,7 +925,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			break;
 		case GIT_COMMIT:
 			if (record->event.pressed) {
-				SEND_STRING("git commit -m \" "SS_TAP(X_ENTER));
+				SEND_STRING("git commit -m \"");
 			}
 			return false;
 			break;
