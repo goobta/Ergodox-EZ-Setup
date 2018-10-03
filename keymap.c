@@ -16,7 +16,8 @@ enum layers {
 	VIM,
 	MAC,
 	TMUX,
-	GAME
+	GAME,
+	GIT
 };
 
 enum custom_keycodes {
@@ -48,6 +49,9 @@ enum custom_keycodes {
 	TMUX_FOCUS_PANE,
 	TMUX_PAUSE_TERM_OUTPUT,
 	TMUX_DETACH,
+	GIT_STATUS,
+	GIT_ADD,
+	GIT_COMMIT
 };
 
 /**
@@ -163,7 +167,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 |			|			 | TMUX |				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |		ESC		 |	A		|  S	 |	D		|  F	 |	G		|-------|						|-------|  H	 |	J		|  K	 |	L		|  ;	 |		'			 |
- * | HOLD(CMD) |			|			 |			|			 |			|		*		|						|		`		|			 |			|			 |			|			 |					 |
+ * | HOLD(CMD) |			|			 |			|			 | HOLD	|		*		|						|		`		|			 |			|			 |			|			 |					 |
+ * |	         |			|			 |			|			 | GIT  |		 		|						|		 		|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------| HOLD( |						| HOLD( |------+------+------+------+------+-----------|
  * |	 SHIFT	 |	Z		|  X	 |	C		|  V	 |	B		| LALT) |						| RALT) |  N	 |	M		|  ,	 |	.		|  /	 |	SHIFT		 |
  * |					 |			|			 |			| HOLD |			|				|						|				|			 |			|			 |			|			 |					 |
@@ -183,10 +188,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[BASE] = LAYOUT_ergodox(
 			// Left Hand
-			KC_GRAVE,					 KC_1,	 KC_2,	 KC_3,	 KC_4,						KC_5,		RGB_VAD,
-			KC_TAB,						 KC_Q,	 KC_W,	 KC_E,	 KC_R,						LT(TMUX, KC_T),							KC_MINUS,
-			GUI_T(KC_ESCAPE),  KC_A,	 KC_S,	 KC_D,	 KC_F,						KC_G,
-			KC_LSHIFT,				 KC_Z,	 KC_X,	 KC_C,	 LT(VIM, KC_V),			KC_B,			ALT_T(KC_KP_ASTERISK),
+			KC_GRAVE,					 KC_1,	 KC_2,	 KC_3,	 KC_4,						  KC_5,		         RGB_VAD,
+			KC_TAB,						 KC_Q,	 KC_W,	 KC_E,	 KC_R,						  LT(TMUX, KC_T),	 KC_MINUS,
+			GUI_T(KC_ESCAPE),  KC_A,	 KC_S,	 KC_D,	 KC_F,						  LT(GIT, KC_G),
+			KC_LSHIFT,				 KC_Z,	 KC_X,	 KC_C,	 LT(VIM, KC_V),			KC_B,			       ALT_T(KC_KP_ASTERISK),
 			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	TO(GAME),
 			
 																																				// Left hand cluster
@@ -652,6 +657,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,					KC_TRANSPARENT,
 							KC_TRANSPARENT,
 							KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
+
+/* Git Keymap
+ * 
+ * ,------------------------------------------------------.						,------------------------------------------------------.
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 | ADD  |STATUS|			|			 |			|-------|						|-------|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |COMMIT|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			`----------------------------------'																				 `----------------------------------'
+ *																				 ,-------------.					 ,-------------.
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																	,------|------|------|					 |------+------+------.
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|------|					 |------|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	`--------------------'					 `--------------------'
+ */
+	
+	[GIT] = LAYOUT_ergodox(
+			//Left hand
+			KC_TRANSPARENT,	KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,KC_TRANSPARENT,
+			KC_TRANSPARENT,	KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,KC_TRANSPARENT,
+			KC_TRANSPARENT,	GIT_ADD       , GIT_STATUS    , KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+			KC_TRANSPARENT,	KC_TRANSPARENT, KC_TRANSPARENT, GIT_COMMIT    , KC_TRANSPARENT, KC_TRANSPARENT,KC_TRANSPARENT,
+			KC_TRANSPARENT,	KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+			
+			// Left thumb cluster
+			KC_TRANSPARENT,KC_TRANSPARENT,
+							KC_TRANSPARENT,
+			KC_TRANSPARENT,KC_TRANSPARENT,
+			KC_TRANSPARENT,
+
+			//Right hand
+			KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+															 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+		
+			// Right thumb cluster
+			KC_TRANSPARENT,					KC_TRANSPARENT,
+			KC_TRANSPARENT,
+			KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -839,6 +908,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case TMUX_FOCUS_PANE:
 			if (record->event.pressed) {
 				SEND_STRING(SS_LCTRL("b")"z");
+			}
+			return false;
+			break;
+		case GIT_ADD:
+			if (record->event.pressed) {
+				SEND_STRING("git add ."SS_TAP(X_ENTER));
+			}
+			return false;
+			break;
+		case GIT_STATUS:
+			if (record->event.pressed) {
+				SEND_STRING("git status"SS_TAP(X_ENTER));
+			}
+			return false;
+			break;
+		case GIT_COMMIT:
+			if (record->event.pressed) {
+				SEND_STRING("git commit -m \" "SS_TAP(X_ENTER));
 			}
 			return false;
 			break;
