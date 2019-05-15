@@ -66,8 +66,7 @@ enum custom_keycodes {
 	C_COMMAND_PALLETTE,
 	C_FORMAT_FILE,
 	C_COMMENT,
-	C_AUTOCOMPLETE,
-	C_PARAM_HELP
+	C_AUTOCOMPLETE
 };
 
 /**
@@ -766,43 +765,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *																				 |			|			 |					 |			|			 |
  *																				 |			|			 |					 |			|			 |
  *																	,------|------|------|					 |------+------+------.
- *																	|E		S|			|			 |					 |			| P		 | A		|
- *																	|X		N|			|			 |					 |			| A		 | U C	|
- *																	|P		I|			|			 |					 |			| R	 H | T O	|
- *																	|A		P|			|------|					 |------| A	 E | O M	|
- *																	|N		P|			|			 |					 |			| M	 L |	 P	|
- *																	|D		E|			|			 |					 |			|		 P |	  	|
- *																	|			T|			|			 |					 |			|			 |			|
+ *																	|E		S|			|			 |					 |			|      | A		|
+ *																	|X		N|			|			 |					 |			|      | U C	|
+ *																	|P		I|			|			 |					 |			|      | T O	|
+ *																	|A		P|			|------|					 |------|      | O M	|
+ *																	|N		P|			|			 |					 |			|      |	 P	|
+ *																	|D		E|			|			 |					 |			|      |	  	|
+ *																	|			T|			|			 |					 |			|      |			|
  *																	`--------------------'					 `--------------------'
  */
  
 	[C_IDE] = LAYOUT_ergodox(
 			// Left hand
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,
-			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,       KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	C_CLOSE,         KC_TRANSPARENT,	KC_TRANSPARENT,       KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	C_SWITCH_FILE,   KC_TRANSPARENT,	C_TOGGLE_FULLSCREEN,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,       C_GOTO_DEF,	    KC_TRANSPARENT,
 			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
 			
 																																				//Left thumb cluster
 																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
 																																																 KC_TRANSPARENT,
-																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
-																																				KC_TRANSPARENT,
+																																				C_EXPAND_SNIPPET,				 KC_TRANSPARENT,
+																																				                         KC_TRANSPARENT,
 			
 							//Right hand
-							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-																			 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,    KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	    KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,    C_IMPORT_SYMBOL,	KC_TRANSPARENT,  C_COMMAND_PALLETTE,	KC_TRANSPARENT,
+																			 C_PANE_LEFT,	    C_MOVE_LINE_DOWN,  C_MOVE_LINE_UP,	C_PANE_RIGHT,    KC_TRANSPARENT,	    C_FORMAT_FILE,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,    KC_TRANSPARENT,	KC_TRANSPARENT,  C_COMMENT,	          KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,    KC_TRANSPARENT,	KC_TRANSPARENT,
 		
 							// Right thumb cluster
 							KC_TRANSPARENT,					KC_TRANSPARENT,
 							KC_TRANSPARENT,
-							KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
+							KC_TRANSPARENT,					KC_TRANSPARENT,   C_AUTOCOMPLETE),
 
-*/
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -1008,6 +1006,90 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case GIT_COMMIT:
 			if (record->event.pressed) {
 				SEND_STRING("git commit -m \"");
+			}
+			return false;
+			break;
+		case C_CLOSE:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("/")"w");
+			}
+			return false;
+			break;
+		case C_SWITCH_FILE:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("P")"switch file"SS_TAP(X_ENTER));
+			}
+			return false;
+			break;
+		case C_TOGGLE_FULLSCREEN:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("/")"vf");
+			}
+			return false;
+			break;
+		case C_GOTO_DEF:
+			if (record->event.pressed) {
+				SEND_STRING(SS_TAP(X_F3));
+			}
+			return false;
+			break;
+		case C_EXPAND_SNIPPET:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("b"));
+			}
+			return false;
+			break;
+		case C_PANE_LEFT:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("h"));
+			}
+			return false;
+			break;
+		case C_PANE_RIGHT:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("l"));
+			}
+			return false;
+			break;
+		case C_MOVE_LINE_UP:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LALT(SS_TAP(X_UP)));
+			}
+			return false;
+			break;
+		case C_MOVE_LINE_DOWN:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LALT(SS_TAP(X_DOWN)));
+			}
+			return false;
+			break;
+		case C_IMPORT_SYMBOL:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("/")"i");
+			}
+			return false;
+			break;
+		case C_COMMAND_PALLETTE:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("P"));
+			}
+			return false;
+			break;
+		case C_FORMAT_FILE:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("P")"format current file"SS_TAP(X_ENTER));
+			}
+			return false;
+			break;
+		case C_COMMENT:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL("/")"/");
+			}
+			return false;
+			break;
+		case C_AUTOCOMPLETE:
+			if (record->event.pressed) {
+				SEND_STRING(SS_LCTRL(" "));
 			}
 			return false;
 			break;
