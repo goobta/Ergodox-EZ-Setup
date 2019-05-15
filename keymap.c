@@ -17,7 +17,8 @@ enum layers {
 	MAC,
 	TMUX,
 	GAME,
-	GIT
+	GIT, 
+	C_IDE
 };
 
 enum custom_keycodes {
@@ -51,7 +52,22 @@ enum custom_keycodes {
 	TMUX_DETACH,
 	GIT_STATUS,
 	GIT_ADD,
-	GIT_COMMIT
+	GIT_COMMIT,
+	C_CLOSE,
+	C_SWITCH_FILE,
+	C_TOGGLE_FULLSCREEN,
+	C_GOTO_DEF,
+	C_EXPAND_SNIPPET,
+	C_PANE_LEFT,
+	C_PANE_RIGHT,
+	C_MOVE_LINE_UP,
+	C_MOVE_LINE_DOWN,
+	C_IMPORT_SYMBOL,
+	C_COMMAND_PALLETTE,
+	C_FORMAT_FILE,
+	C_COMMENT,
+	C_AUTOCOMPLETE,
+	C_PARAM_HELP
 };
 
 /**
@@ -171,8 +187,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |	         |			|			 |			|			 | GIT  |		 		|						|		 		|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------| HOLD( |						| HOLD( |------+------+------+------+------+-----------|
  * |	 SHIFT	 |	Z		|  X	 |	C		|  V	 |	B		| LALT) |						| RALT) |  N	 |	M		|  ,	 |	.		|  /	 |	SHIFT		 |
- * |					 |			|			 |			| HOLD |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 |			|			 |			|(VIM) |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 | HOLD | HOLD |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 | C-IDE|(VIM) |			|				|						|				|			 |			|			 |			|			 |					 |
  * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
  *			| MATH | SYMB | NAV  |	MAC | GAME |																	     | DOWN |  UP  | SYMB | <-	 |	->	|
  *			|  TG  |	MO	|  TT  |	MO	|	 T0	 |																			 | ARROW| ARROW| MO		|			 |			|
@@ -188,11 +204,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[BASE] = LAYOUT_ergodox(
 			// Left Hand
-			KC_GRAVE,					 KC_1,	 KC_2,	 KC_3,	 KC_4,						  KC_5,		         RGB_VAD,
-			KC_TAB,						 KC_Q,	 KC_W,	 KC_E,	 KC_R,						  LT(TMUX, KC_T),	 KC_MINUS,
-			GUI_T(KC_ESCAPE),  KC_A,	 KC_S,	 KC_D,	 KC_F,						  LT(GIT, KC_G),
-			KC_LSHIFT,				 KC_Z,	 KC_X,	 KC_C,	 LT(VIM, KC_V),			KC_B,			       ALT_T(KC_KP_ASTERISK),
-			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	TO(GAME),
+			KC_GRAVE,					 KC_1,	    KC_2,	    KC_3,	           KC_4,						  KC_5,		         RGB_VAD,
+			KC_TAB,						 KC_Q,	    KC_W,	    KC_E,	           KC_R,						  LT(TMUX, KC_T),	 KC_MINUS,
+			GUI_T(KC_ESCAPE),  KC_A,	    KC_S,	    KC_D,	           KC_F,						  LT(GIT, KC_G),
+			KC_LSHIFT,				 KC_Z,	    KC_X,	    LT(C_IDE, KC_C), LT(VIM, KC_V),			KC_B,			       ALT_T(KC_KP_ASTERISK),
+			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	       TO(GAME),
 			
 																																				// Left hand cluster
 																																				RGB_MOD,					RGB_HUI,
@@ -721,6 +737,72 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TRANSPARENT,					KC_TRANSPARENT,
 			KC_TRANSPARENT,
 			KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
+
+/* C-IDE Keymap
+ * 
+ * ,------------------------------------------------------.						,------------------------------------------------------.
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
+ * |					 |			|CLOSE |			|			 |			|				|						|				|			 |			|IMPORT|			| CMD  |					 |
+ * |					 |			| FILE |			|			 |			|				|						|				|			 |			|SYMBOL|			|PALLET|					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|SWITCH|			|TOGGLE|			|				|						|				| PANE | MOVE | MOVE | PANE |			 |  FORMAT   |
+ * |					 |			| FILE |			| FULL |			|-------|						|-------|			 | LINE |	LINE |			|			 |	FILE   	 |
+ * |					 |			|			 |			|SCREEN|			|				|						|				| LEFT | DOWN |  UP  |RIGHT |			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 | OPEN |				|						|				|			 |			|			 |			|COMENT|					 |
+ * |					 |			|			 |			|			 |  DEF |				|						|				|			 |			|			 |			|SELECT|					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|	     |					 |
+ * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			`----------------------------------'																				 `----------------------------------'
+ *																				 ,-------------.					 ,-------------.
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																	,------|------|------|					 |------+------+------.
+ *																	|E		S|			|			 |					 |			| P		 | A		|
+ *																	|X		N|			|			 |					 |			| A		 | U C	|
+ *																	|P		I|			|			 |					 |			| R	 H | T O	|
+ *																	|A		P|			|------|					 |------| A	 E | O M	|
+ *																	|N		P|			|			 |					 |			| M	 L |	 P	|
+ *																	|D		E|			|			 |					 |			|		 P |	  	|
+ *																	|			T|			|			 |					 |			|			 |			|
+ *																	`--------------------'					 `--------------------'
+ */
+ 
+	[C_IDE] = LAYOUT_ergodox(
+			// Left hand
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			
+																																				//Left thumb cluster
+																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
+																																																 KC_TRANSPARENT,
+																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
+																																				KC_TRANSPARENT,
+			
+							//Right hand
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+																			 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+		
+							// Right thumb cluster
+							KC_TRANSPARENT,					KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
+
+*/
 };
 
 const uint16_t PROGMEM fn_actions[] = {
