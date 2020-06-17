@@ -18,7 +18,8 @@ enum layers {
 	TMUX,
 	GAME,
 	GIT, 
-	C_IDE
+	C_IDE,
+	MINECRAFT
 };
 
 enum custom_keycodes {
@@ -800,6 +801,69 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 							KC_TRANSPARENT,					KC_TRANSPARENT,
 							KC_TRANSPARENT,
 							KC_TRANSPARENT,					KC_TRANSPARENT,   C_AUTOCOMPLETE),
+
+/* Minecraft
+ * 
+ * ,------------------------------------------------------.						,------------------------------------------------------.
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |	1		|		2	 |	3		|		4	 |	5		|		6		|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |	tab			 |	q		|		w	 |	e		|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |	esc			 |	a		|		s	 |	d 	|	f 	 |			|-------|						|-------|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |	l shift	 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|	base |	f2	|	 f3	 |	f5	|	f11	 |																				 |			|			 |			|			 |			|
+ *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			`----------------------------------'																				 `----------------------------------'
+ *																				 ,-------------.					 ,-------------.
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																				 |			|			 |					 |			|			 |
+ *																	,------|------|------|					 |------+------+------.
+ *																	|	s		 |			|			 |					 |			|			 |			|
+ *																	|	p		 |			|			 |					 |			|			 |			|
+ *																	|	a		 |			|			 |					 |			|			 |			|
+ *																	|	c		 |			|------|					 |------|			 |			|
+ *																	|	e		 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|			 |					 |			|			 |			|
+ *																	`--------------------'					 `--------------------'
+ */
+	[MINECRAFT] = LAYOUT_ergodox(
+			// Left hand
+			KC_TRANSPARENT,  KC_1, 	          KC_2,            KC_3,	          KC_4,            KC_5,	          KC_6,
+			KC_TAB,          KC_Q,	          KC_W,            KC_E,	          KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_ESCAPE,       KC_A,	          KC_S,            KC_D,	          KC_F,            KC_TRANSPARENT,
+			KC_LSHIFT,       KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+			TO(BASE),        KC_F2,	          KC_F3,           KC_F5,	          KC_F11,
+			
+																																				//Left thumb cluster
+																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
+																																																 KC_TRANSPARENT,
+																																				KC_SPACE,                KC_TRANSPARENT,
+																																				KC_TRANSPARENT,
+			
+							//Right hand
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+																			 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+											KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
+		
+							// Right thumb cluster
+							KC_TRANSPARENT,					KC_TRANSPARENT,
+							KC_TRANSPARENT,
+							KC_TRANSPARENT,					KC_TRANSPARENT,  KC_TRANSPARENT),
 
 };
 
