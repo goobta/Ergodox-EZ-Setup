@@ -190,8 +190,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |					 |			|			 | HOLD | HOLD |			|				|						|				|			 |			|			 |			|			 |					 |
  * |					 |			|			 | C-IDE|(VIM) |			|				|						|				|			 |			|			 |			|			 |					 |
  * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
- *			| MATH | SYMB | NAV  |	MAC | GAME |																	     | DOWN |  UP  | SYMB | <-	 |	->	|
- *			|  TG  |	MO	|  TT  |	MO	|	 T0	 |																			 | ARROW| ARROW| MO		|			 |			|
+ *			| MINE | SYMB | NAV  |	MAC | GAME |																	     | DOWN |  UP  | SYMB | <-	 |	->	|
+ *			|  TG  |	MO	|  TT  |	MO	|	 TG	 |																			 | ARROW| ARROW| MO		|			 |			|
  *			`----------------------------------'																			 `----------------------------------'
  *																				 ,-------------.					 ,-------------.
  *																				 |ANIME | H UP |					 | V UP | MUTE |
@@ -208,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_TAB,						 KC_Q,	    KC_W,	    KC_E,	           KC_R,						  LT(TMUX, KC_T),	 KC_MINUS,
 			GUI_T(KC_ESCAPE),  KC_A,	    KC_S,	    KC_D,	           KC_F,						  LT(GIT, KC_G),
 			KC_LSHIFT,				 KC_Z,	    KC_X,	    LT(C_IDE, KC_C), LT(VIM, KC_V),			KC_B,			       ALT_T(KC_KP_ASTERISK),
-			TG(MATH),					 MO(SYMB),	TT(NAV),	MO(MAC),	       TO(GAME),
+			TO(MINECRAFT),		 MO(SYMB),	TT(NAV),	MO(MAC),	       TO(GAME),
 			
 																																				// Left hand cluster
 																																				RGB_MOD,					RGB_HUI,
