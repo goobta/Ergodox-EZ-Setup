@@ -67,7 +67,8 @@ enum custom_keycodes {
 	C_COMMAND_PALLETTE,
 	C_FORMAT_FILE,
 	C_COMMENT,
-	C_AUTOCOMPLETE
+	C_AUTOCOMPLETE,
+	MC_SCROLL_NEXT
 };
 
 /**
@@ -806,52 +807,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * 
  * ,------------------------------------------------------.						,------------------------------------------------------.
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 |	1		|		2	 |	3		|		4	 |	5		|		6		|						|				|			 |			|			 |			|			 |					 |
+ * |  esc      |	1		|		2	 |	3		|		4	 |	5		|		6		|						|				|			 |			|			 |			|			 |					 |
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+--------------|						|-------+------+------+------+------+------+-----------|
- * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |	tab			 |	q		|		w	 |	e		|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			| MC   |			|				|						|				|			 |			|			 |			|			 |					 |
+ * |	tab			 |	q		|		w	 |	e		|scroll|			|				|						|				|			 |			|			 |			|			 |					 |
+ * |					 |			|			 |			|	next |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
- * |	esc			 |	a		|		s	 |	d 	|	f 	 |			|-------|						|-------|			 |			|			 |			|			 |					 |
- * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
+ * | left 		 |	a		|		s	 |	d 	| 	f  |			|-------|						|-------|			 |			|			 |			|			 |					 |
+ * |	cntrl	   |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |-----------+------+------+------+------+------|				|						|				|------+------+------+------+------+-----------|
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |	l shift	 |			|			 |	c 	|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * |					 |			|			 |			|			 |			|				|						|				|			 |			|			 |			|			 |					 |
  * `-----------+------+------+------+------+--------------'						` -------------+------+------+------+------+-----------'
- *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
- *			|	base |	f2	|	 f3	 |	f5	|	f11	 |																				 |			|			 |			|			 |			|
- *			|			 |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|	     |			|			 |			|			 |																				 |			|			 |			|			 |			|
+ *			|      |	f2	|	 f3	 |	f11	|	base |																				 |			|			 |			|			 |			|
+ *			|      |			|			 |			|			 |																				 |			|			 |			|			 |			|
  *			`----------------------------------'																				 `----------------------------------'
  *																				 ,-------------.					 ,-------------.
  *																				 |			|			 |					 |			|			 |
- *																				 |			|			 |					 |			|			 |
+ *																				 |pg up	|pg dwn|					 |			|			 |
  *																				 |			|			 |					 |			|			 |
  *																	,------|------|------|					 |------+------+------.
  *																	|	s		 |			|			 |					 |			|			 |			|
- *																	|	p		 |			|			 |					 |			|			 |			|
+ *																	|	p		 |			|	 end |					 |			|			 |			|
  *																	|	a		 |			|			 |					 |			|			 |			|
- *																	|	c		 |			|------|					 |------|			 |			|
+ *																	|	c		 |	f5	|------|					 |------|			 |			|
  *																	|	e		 |			|			 |					 |			|			 |			|
- *																	|			 |			|			 |					 |			|			 |			|
+ *																	|			 |			|	home |					 |			|			 |			|
  *																	|			 |			|			 |					 |			|			 |			|
  *																	`--------------------'					 `--------------------'
  */
 	[MINECRAFT] = LAYOUT_ergodox(
 			// Left hand
-			KC_TRANSPARENT,  KC_1, 	          KC_2,            KC_3,	          KC_4,            KC_5,	          KC_6,
-			KC_TAB,          KC_Q,	          KC_W,            KC_E,	          KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			KC_ESCAPE,       KC_A,	          KC_S,            KC_D,	          KC_F,            KC_TRANSPARENT,
-			KC_LSHIFT,       KC_TRANSPARENT,	KC_TRANSPARENT,  KC_C,	          KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
-			TO(BASE),        KC_F2,	          KC_F3,           KC_F5,	          KC_F11,
+			KC_ESCAPE,       KC_1, 	          KC_2,            KC_3,	          KC_4,                   KC_5,	          KC_6,
+			KC_TAB,          KC_Q,	          KC_W,            KC_E,	          MC_SCROLL_NEXT,         KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_LCTRL,        KC_A,	          KC_S,            KC_D,	          KC_F,                   KC_TRANSPARENT,
+			KC_LSHIFT,       KC_TRANSPARENT,	KC_TRANSPARENT,  KC_C,	          KC_TRANSPARENT,         KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_SPACE,        KC_F2,	          KC_F3,           KC_F11,	        TO(BASE),
 			
 																																				//Left thumb cluster
-																																				KC_TRANSPARENT,					 KC_TRANSPARENT,
-																																																 KC_TRANSPARENT,
-																																				KC_SPACE,                KC_TRANSPARENT,
-																																				KC_TRANSPARENT,
+																																				KC_PGUP,					       KC_PGDN,
+																																																 KC_END,
+																																				KC_SPACE,                KC_F5,
+																																				KC_HOME,
 			
 							//Right hand
 							KC_TRANSPARENT,					 KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,  KC_TRANSPARENT,	KC_TRANSPARENT,
@@ -1154,6 +1155,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case C_AUTOCOMPLETE:
 			if (record->event.pressed) {
 				SEND_STRING(SS_LCTRL(" "));
+			}
+			return false;
+			break;
+		case MC_SCROLL_NEXT:
+			if (record->event.pressed) {
+				register_code(KC_WH_D);
+				SEND_STRING(SS_DELAY(100));
+				unregister_code(KC_WH_D);
 			}
 			return false;
 			break;
